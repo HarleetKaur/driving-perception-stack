@@ -1,0 +1,15 @@
+data/
+*.pt
+*.onnx
+*.engine
+*.pth
+runs/
+.env
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+wandb/
+100k/
+bdd100k*/

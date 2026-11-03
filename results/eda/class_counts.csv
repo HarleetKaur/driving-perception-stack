@@ -1,0 +1,9 @@
+class,train,val,total
+car,23026,5716,28742
+pedestrian,3566,921,4487
+van,2359,555,2914
+cyclist,1275,352,1627
+truck,871,223,1094
+misc,765,208,973
+tram,394,117,511
+person_sitting,186,36,222
