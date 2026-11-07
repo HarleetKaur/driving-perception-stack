@@ -1,0 +1,14 @@
+{
+  "video": "data/raw/videos/clip.mp4",
+  "frames": 1537,
+  "device": "mps",
+  "processing_fps_including_drawing_and_writing": 14.9,
+  "unique_tracks": 73,
+  "per_class": {
+    "vehicle": {
+      "tracks": 73,
+      "median_track_length_frames": 21,
+      "short_tracks_under_5_frames": 18
+    }
+  }
+}

@@ -13,3 +13,5 @@ __pycache__/
 wandb/
 100k/
 bdd100k*/
+models/
+*.mp4

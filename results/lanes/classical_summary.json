@@ -1,0 +1,14 @@
+{
+  "frames": 1537,
+  "both_lanes_found_pct": 97.7,
+  "at_least_one_lane_found_pct": 99.3,
+  "roi_used": {
+    "top_y": 0.58,
+    "bottom_y": 0.7,
+    "top_left": 0.44,
+    "top_right": 0.56,
+    "bottom_left": 0.25,
+    "bottom_right": 0.82
+  },
+  "note": "Detection rate only. This is NOT accuracy: no ground-truth lane labels used."
+}
