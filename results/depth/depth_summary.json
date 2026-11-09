@@ -1,0 +1,117 @@
+{
+  "summary": {
+    "frames": 20,
+    "total_objects": 129,
+    "frames_with_3plus_objects": 20,
+    "mean_spearman": 0.92,
+    "median_spearman": 0.96,
+    "detector_settings": {
+      "conf": 0.25,
+      "imgsz": 1280
+    },
+    "depth_model": "Intel/dpt-hybrid-midas (zero-shot, relative depth)",
+    "note": "Relative distance only, no metres: the camera is uncalibrated. Spearman compares depth ordering with a flat-road geometric cue (lower box bottom = closer). Indicative only, small sample."
+  },
+  "frames": [
+    {
+      "frame": "frame_00000",
+      "objects": 4,
+      "spearman_depth_vs_box_bottom": 0.8
+    },
+    {
+      "frame": "frame_00080",
+      "objects": 12,
+      "spearman_depth_vs_box_bottom": 0.71
+    },
+    {
+      "frame": "frame_00161",
+      "objects": 8,
+      "spearman_depth_vs_box_bottom": 0.98
+    },
+    {
+      "frame": "frame_00242",
+      "objects": 8,
+      "spearman_depth_vs_box_bottom": 0.98
+    },
+    {
+      "frame": "frame_00323",
+      "objects": 5,
+      "spearman_depth_vs_box_bottom": 1.0
+    },
+    {
+      "frame": "frame_00404",
+      "objects": 8,
+      "spearman_depth_vs_box_bottom": 0.79
+    },
+    {
+      "frame": "frame_00485",
+      "objects": 5,
+      "spearman_depth_vs_box_bottom": 1.0
+    },
+    {
+      "frame": "frame_00565",
+      "objects": 7,
+      "spearman_depth_vs_box_bottom": 0.95
+    },
+    {
+      "frame": "frame_00646",
+      "objects": 7,
+      "spearman_depth_vs_box_bottom": 1.0
+    },
+    {
+      "frame": "frame_00727",
+      "objects": 6,
+      "spearman_depth_vs_box_bottom": 1.0
+    },
+    {
+      "frame": "frame_00808",
+      "objects": 7,
+      "spearman_depth_vs_box_bottom": 0.79
+    },
+    {
+      "frame": "frame_00889",
+      "objects": 5,
+      "spearman_depth_vs_box_bottom": 1.0
+    },
+    {
+      "frame": "frame_00970",
+      "objects": 4,
+      "spearman_depth_vs_box_bottom": 1.0
+    },
+    {
+      "frame": "frame_01050",
+      "objects": 6,
+      "spearman_depth_vs_box_bottom": 0.83
+    },
+    {
+      "frame": "frame_01131",
+      "objects": 7,
+      "spearman_depth_vs_box_bottom": 0.99
+    },
+    {
+      "frame": "frame_01212",
+      "objects": 5,
+      "spearman_depth_vs_box_bottom": 1.0
+    },
+    {
+      "frame": "frame_01293",
+      "objects": 7,
+      "spearman_depth_vs_box_bottom": 0.89
+    },
+    {
+      "frame": "frame_01374",
+      "objects": 6,
+      "spearman_depth_vs_box_bottom": 0.94
+    },
+    {
+      "frame": "frame_01455",
+      "objects": 6,
+      "spearman_depth_vs_box_bottom": 0.77
+    },
+    {
+      "frame": "frame_01536",
+      "objects": 6,
+      "spearman_depth_vs_box_bottom": 0.94
+    }
+  ]
+}

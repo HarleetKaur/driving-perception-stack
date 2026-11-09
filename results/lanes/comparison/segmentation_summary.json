@@ -1,0 +1,131 @@
+{
+  "summary": {
+    "frames": 20,
+    "frames_with_classical_line": 20,
+    "mean_line_pixels_on_road_pct": 99.8,
+    "model": "nvidia/segformer-b0-finetuned-cityscapes-1024-1024",
+    "note": "Sanity check only. The segmentation model was not trained by me and has no lane-marking class. A classical line can lie on 'road' and still be on the wrong lane. No ground-truth lane labels were used."
+  },
+  "frames": [
+    {
+      "frame": "frame_00000",
+      "classical_line_pixels": 5544,
+      "road_pct_of_frame": 27.3,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_00080",
+      "classical_line_pixels": 5723,
+      "road_pct_of_frame": 28.7,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_00161",
+      "classical_line_pixels": 5614,
+      "road_pct_of_frame": 23.9,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_00242",
+      "classical_line_pixels": 5713,
+      "road_pct_of_frame": 26.1,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_00323",
+      "classical_line_pixels": 5758,
+      "road_pct_of_frame": 15.4,
+      "line_pixels_on_road_pct": 96.9
+    },
+    {
+      "frame": "frame_00404",
+      "classical_line_pixels": 5740,
+      "road_pct_of_frame": 26.2,
+      "line_pixels_on_road_pct": 99.7
+    },
+    {
+      "frame": "frame_00485",
+      "classical_line_pixels": 5738,
+      "road_pct_of_frame": 25.9,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_00565",
+      "classical_line_pixels": 5752,
+      "road_pct_of_frame": 26.4,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_00646",
+      "classical_line_pixels": 5709,
+      "road_pct_of_frame": 24.9,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_00727",
+      "classical_line_pixels": 5722,
+      "road_pct_of_frame": 25.2,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_00808",
+      "classical_line_pixels": 5711,
+      "road_pct_of_frame": 24.6,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_00889",
+      "classical_line_pixels": 5657,
+      "road_pct_of_frame": 24.0,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_00970",
+      "classical_line_pixels": 5732,
+      "road_pct_of_frame": 23.9,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_01050",
+      "classical_line_pixels": 5707,
+      "road_pct_of_frame": 24.8,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_01131",
+      "classical_line_pixels": 5761,
+      "road_pct_of_frame": 25.7,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_01212",
+      "classical_line_pixels": 5730,
+      "road_pct_of_frame": 24.2,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_01293",
+      "classical_line_pixels": 5746,
+      "road_pct_of_frame": 25.1,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_01374",
+      "classical_line_pixels": 5740,
+      "road_pct_of_frame": 24.8,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_01455",
+      "classical_line_pixels": 5733,
+      "road_pct_of_frame": 23.8,
+      "line_pixels_on_road_pct": 100.0
+    },
+    {
+      "frame": "frame_01536",
+      "classical_line_pixels": 5750,
+      "road_pct_of_frame": 20.1,
+      "line_pixels_on_road_pct": 100.0
+    }
+  ]
+}
