@@ -30,4 +30,4 @@
 ## Depth and Distance Observations
 - Depth estimation identifies nearby vehicles as NEAR and distant vehicles as FAR, helping distinguish objects based on their relative distance.
 - The detector successfully identifies the nearby black SUV as NEAR and farther vehicles as MID or FAR.
-- The detector required imgsz=1280 to detect objects properly in this wide-angle cl
+- At imgsz=1280 the detector found 129 objects over 20 frames; the first run at 640 drew no boxes on the three frames inspected (difference not quantified).
