@@ -86,3 +86,20 @@ ordering is consistent with a flat-road geometric cue; it is not a measurement o
 accuracy, and monocular depth models learn the same cue, so the agreement is partly expected.
 Small sample, single clip. Failure case: dense distant traffic produces overlapping tiny boxes
 with unreliable labels.
+## Optimization: ONNX and TensorRT benchmark
+Model: improved YOLO11s (KITTI, 3 classes), exported to ONNX and TensorRT FP16 (imgsz 640).
+GPU: Tesla T4 (Google Colab). 300 KITTI test images, after 10-20 warm-up images.
+
+| Format | Median inference (ms) | FPS | End-to-end (ms/image) | Test mAP50 | Test mAP50-95 |
+|---|---|---|---|---|---|
+| PyTorch FP32 | 8.34 | 119.9 | 13.38 | 0.831 | 0.556 |
+| ONNX Runtime (GPU) | 8.98 | 111.4 | 15.08 | 0.831 | 0.560 |
+| TensorRT FP16 | 2.74 | 364.5 | 9.12 | 0.829 | 0.557 |
+
+TensorRT FP16 was about 3x faster than PyTorch at the model step and about 1.5x faster end to
+end, with no meaningful accuracy change (mAP differences of 0.002 or less). ONNX Runtime gave no
+speed-up in this setup (not investigated). Caveats: one run on a shared free Colab GPU, so
+results vary between sessions; "inference" excludes image reading and pre/post-processing
+(the end-to-end column includes them); a TensorRT engine only runs on the GPU type it was built on.
+Note: in an earlier run the Colab session crashed while loading ONNX after TensorRT had updated
+packages mid-session; a clean rerun worked.

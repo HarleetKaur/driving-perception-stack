@@ -1,0 +1,35 @@
+[
+  {
+    "format": "PyTorch FP32",
+    "gpu": "Tesla T4",
+    "images_timed": 300,
+    "mean_inference_ms": 17.34,
+    "median_inference_ms": 12.73,
+    "fps_from_median_inference": 78.5,
+    "end_to_end_ms_per_image": 25.91,
+    "test_mAP50": 0.831,
+    "test_mAP50-95": 0.556
+  },
+  {
+    "format": "ONNX",
+    "gpu": "Tesla T4",
+    "images_timed": 300,
+    "mean_inference_ms": 9.12,
+    "median_inference_ms": 9.06,
+    "fps_from_median_inference": 110.4,
+    "end_to_end_ms_per_image": 14.68,
+    "test_mAP50": 0.831,
+    "test_mAP50-95": 0.56
+  },
+  {
+    "format": "TensorRT FP16",
+    "gpu": "Tesla T4",
+    "images_timed": 300,
+    "mean_inference_ms": 2.73,
+    "median_inference_ms": 2.79,
+    "fps_from_median_inference": 359.0,
+    "end_to_end_ms_per_image": 9.1,
+    "test_mAP50": 0.829,
+    "test_mAP50-95": 0.557
+  }
+]

@@ -1,0 +1,4 @@
+format,gpu,images_timed,mean_inference_ms,median_inference_ms,fps_from_median_inference,end_to_end_ms_per_image,test_mAP50,test_mAP50-95
+PyTorch FP32,Tesla T4,300,17.34,12.73,78.5,25.91,0.831,0.556
+ONNX,Tesla T4,300,9.12,9.06,110.4,14.68,0.831,0.56
+TensorRT FP16,Tesla T4,300,2.73,2.79,359.0,9.1,0.829,0.557
