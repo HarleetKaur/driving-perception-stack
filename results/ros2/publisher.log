@@ -1,0 +1,3 @@
+[INFO] [1794651662.096962833] [video_publisher]: Video: /ws/data/raw/videos/clip.mp4. Waiting for a subscriber on /camera/image_raw ...
+[INFO] [1794651663.091241542] [video_publisher]: Subscriber found, starting in 3 s
+[INFO] [1794651922.095712843] [video_publisher]: Done: published 512 frames

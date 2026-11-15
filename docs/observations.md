@@ -31,3 +31,8 @@
 - Depth estimation identifies nearby vehicles as NEAR and distant vehicles as FAR, helping distinguish objects based on their relative distance.
 - The detector successfully identifies the nearby black SUV as NEAR and farther vehicles as MID or FAR.
 - At imgsz=1280 the detector found 129 objects over 20 frames; the first run at 640 drew no boxes on the three frames inspected (difference not quantified).
+
+## ROS2 pipeline
+- Object detection successfully identifies multiple vehicles with green bounding boxes and track IDs.
+- Lane detection successfully displays the left and right lane markings.
+- Some bounding boxes and labels overlap near nearby vehicles, making identification slightly difficult.
