@@ -1,0 +1,9 @@
+test_empty_image_is_rejected (test_ros_utils.TestRosUtils) ... ok
+test_round_trip (test_ros_utils.TestRosUtils) ... ok
+test_wrong_data_size_is_rejected (test_ros_utils.TestRosUtils) ... ok
+test_wrong_encoding_is_rejected (test_ros_utils.TestRosUtils) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.034s
+
+OK
