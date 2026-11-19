@@ -3,11 +3,14 @@
 A vision pipeline that detects lanes, vehicles, and pedestrians, tracks them,
 estimates distance, and runs on a camera feed through ROS2.
 
+## Architecture
+![Architecture](docs/architecture.png)
+Topics, message formats and file formats: see [docs/api.md](docs/api.md).
+
 **Status:** In progress (started 30 Oct 2026)
 
-## Planned stack
-YOLO, OpenCV, ByteTrack, MiDaS, ROS2, ONNX, TensorRT, Weights & Biases
-
+## Stack
+Python, Ultralytics YOLO11, ByteTrack, OpenCV, SegFormer (Hugging Face), DPT-Hybrid (MiDaS family), ONNX, TensorRT, ROS2 Humble (Docker), Weights & Biases, Google Colab.
 ## Dataset
 KITTI (Karlsruhe Institute of Technology / Toyota Technological Institute), loaded via Ultralytics.
 
@@ -20,7 +23,47 @@ KITTI is heavily imbalanced: car is about 71% of all boxes, while person_sitting
 Per-class metrics are therefore reported, not only an overall score.
 
 ## Setup
-[To be completed]
+Developed on a MacBook (Apple M2) with Python 3.14 in VS Code. GPU steps ran on Google Colab (T4).
+ROS2 Humble runs in Docker. Data, model weights and videos are NOT in the repository (size/licence);
+the weights (`models/improved_best.pt`) are in the Drive submission folder.
+
+1. Environment
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+(`requirements-lock.txt` lists the exact versions used.)
+
+2. Data (KITTI via Ultralytics, ~390 MB, downloads automatically) and 3-class splits
+```
+python src/eda_kitti.py --out results/eda
+python src/prepare_data.py --out data/processed/kitti3
+```
+3. Training, lane segmentation, depth, ONNX/TensorRT benchmark: run notebooks 01 to 04 in Google Colab
+(T4 GPU). Upload `kitti3.zip` to Drive first. The Weights & Biases key goes in Colab Secrets (never in code).
+
+4. Tracking and lane detection on a driving video (needs `data/raw/videos/clip.mp4` and `models/improved_best.pt`)
+```
+python src/tracking/track_video.py --weights models/improved_best.pt --video data/raw/videos/clip.mp4 --out results/tracking
+python src/lanes/classical.py --video data/raw/videos/clip.mp4 --out results/lanes --roi-bottom-y 0.70
+```
+5. ROS2 demo (Docker)
+```
+docker build -t driving-perception-ros2 docker/
+docker run --rm -it --name ros-demo -v "$(pwd)":/ws -w /ws driving-perception-ros2 bash
+bash scripts/run_ros2_demo.sh        # inside the container; add "40" for a short test
+```
+Topics: /camera/image_raw (sensor_msgs/Image), /perception/overlay (sensor_msgs/Image),
+/perception/detections (std_msgs/String, JSON). Output: results/ros2/ros2_demo.mp4.
+
+6. Tests
+```
+python -m unittest discover -s tests -v
+# inside the Docker container:
+source /opt/ros/humble/setup.bash && python3 -m unittest discover -s tests/ros2 -v
+```
+Test video source and licence: Pexels, "Busy Urban Traffic View from a Car" by Jabriel. Free under the Pexels License. Source: https://www.pexels.com/video/busy-urban-traffic-view-from-a-car-31901299/
 
 
 ## Detection results (YOLO, KITTI, 3 classes)
@@ -53,9 +96,9 @@ The tracker assigned non-consecutive IDs, such as 11, 25, 31 and 250. These numb
 
 A total of 18 tracks lasted fewer than five frames. 
 
-Tracking run: Improved YOLO11s weights, imgsz=640, conf=0.25, using ByteTrack for object tracking.
+Tracking run: improved YOLO11s weights, imgsz=640, conf=0.25, ByteTrack (Ultralytics default tracker settings), all 1,537 video frames processed.
 
- Observed issues: In crowded traffic, overlapping bounding boxes and labels make vehicle tracking less reliable. Vehicles moving close together or becoming partially hidden can be lost behind other objects. The bad tracking example also shows a low-confidence detection (ID 38, confidence 0.28) on a vehicle in the adjacent roadway.
+Observed issues: Tracking boxes overlap in crowded areas, which makes it hard to tell which box belongs to which vehicle. ID switches were not counted (there are no tracking ground-truth labels); the statement above that no clear ID switches were seen comes from visual inspection of parts of the video.
 
 **Output files:**
 - `tracked.mp4` – Annotated tracking video.
@@ -103,3 +146,27 @@ results vary between sessions; "inference" excludes image reading and pre/post-p
 (the end-to-end column includes them); a TensorRT engine only runs on the GPU type it was built on.
 Note: in an earlier run the Colab session crashed while loading ONNX after TensorRT had updated
 packages mid-session; a clean rerun worked.
+
+## ROS2 pipeline (recorded video replaces CARLA)
+Three ROS2 Humble nodes run in Docker on CPU: `video_publisher` plays the clip as a camera
+(/camera/image_raw, every 3rd frame, 960 px wide), `perception_node` runs the improved YOLO11s with
+ByteTrack plus the classical lane detector and publishes /perception/overlay and /perception/detections
+(JSON), and `overlay_recorder` writes results/ros2/ros2_demo.mp4.
+Full run: 512 frames processed, 51 s output video. Average YOLO+tracking time over the logged frames:
+213 ms per frame (results/ros2/perception.log). Not real time (CPU in Docker).
+Demo video: demo/ros2_pipeline_demo.mp4 in the Drive submission folder.
+Observed issues: Some green bounding boxes and vehicle labels overlap in crowded traffic, making it difficult to tell which label belongs to which vehicle. Because only every 3rd video frame is used, track IDs
+may be less stable than in the full-frame-rate tracking run (not measured).
+
+## Deviations and limitations
+- Dataset: KITTI instead of BDD100K (official portal unavailable on 2 Nov 2026; label files not obtained).
+- Simulator: CARLA was not used (no NVIDIA/Linux machine available). A recorded driving video is streamed
+  through ROS2 instead, as permitted in Nexvia's written reply (docs/).
+- The ROS2 pipeline runs on CPU in Docker, so it is not real time: frames are resized to 960 px wide and
+  every 3rd video frame is used.
+- Depth (MiDaS family) ran offline in Colab, not inside the ROS2 pipeline; it gives relative distance only
+  (no metres; the camera is uncalibrated).
+- TensorRT needs an NVIDIA GPU, so the TensorRT benchmark ran on Colab, not on the Mac.
+- Lane segmentation uses a pretrained model as-is (road surface, not lane markings). No ground-truth lane or
+  tracking labels were used, so lane and tracking results are qualitative or detection rates only.
+- Classes merged to vehicle / pedestrian / cyclist (misc dropped). Single training run per model.
