@@ -7,7 +7,7 @@ estimates distance, and runs on a camera feed through ROS2.
 ![Architecture](docs/architecture.png)
 Topics, message formats and file formats: see [docs/api.md](docs/api.md).
 
-**Status:** In progress (started 30 Oct 2026)
+**Status:** Complete (submitted 20 Nov 2026)
 
 ## Stack
 Python, Ultralytics YOLO11, ByteTrack, OpenCV, SegFormer (Hugging Face), DPT-Hybrid (MiDaS family), ONNX, TensorRT, ROS2 Humble (Docker), Weights & Biases, Google Colab.
